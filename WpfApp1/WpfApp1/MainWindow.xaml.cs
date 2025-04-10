@@ -17,9 +17,12 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<MyItem> Items { get;set }
         public MainWindow()
         {
             InitializeComponent();
+            items = new List<MyItem>();
+            listView.ItemsSource = items;
         }
 
 
@@ -27,7 +30,14 @@ namespace WpfApp1
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Window1 myWindow = new Window1();
+            myWindow.DataSubmit += AddItemToList;
             myWindow.Show();
+        }
+
+        private void AddItemToList(MyItem item)
+        {
+            items.Add(item);
+            listView.Items.Refresh();
         }
 
     }
