@@ -1,31 +1,18 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        public List<MyItem> Items { get;set }
+        public List<MyItem> Items { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
-            items = new List<MyItem>();
-            listView.ItemsSource = items;
+            Items = new List<MyItem>();
+            listView.ItemsSource = Items;
         }
-
-
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
@@ -36,9 +23,15 @@ namespace WpfApp1
 
         private void AddItemToList(MyItem item)
         {
-            items.Add(item);
-            listView.Items.Refresh();
+            if (PeselChck.IsValidPesel(item.PESEL))
+            {
+                Items.Add(item);
+                listView.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Nieprawidłowy PESEL");
+            }
         }
-
     }
 }

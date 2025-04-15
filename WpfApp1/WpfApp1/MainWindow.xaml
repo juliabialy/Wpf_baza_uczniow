@@ -5,23 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Margin="0,0,0,-6">
-        <ListView x:Name="listView" Margin="0,0,0,62">
-            <ListView.View >
-                <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding m_nID}" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="Imię" DisplayMemberBinding="{Binding m_strName}" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="Nazwisko" DisplayMemberBinding="{Binding m_strSname}" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="PESEL" DisplayMemberBinding="{Binding m_strPESEL}" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="Drugie Imię" DisplayMemberBinding="{Binding m_strSecoundName}" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="Data Urodzenia" DisplayMemberBinding="{Binding m_dBirthDate}" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="Numer Telefonu" DisplayMemberBinding="{Binding m_nPhoneNumber}" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="Adres Zamieszkania" DisplayMemberBinding="{Binding m_strHomeAdress}" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="Kod Pocztowy" DisplayMemberBinding="{Binding m_strHomeCode}" Width="100"></GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button x:Name="button" Content="dodaj" HorizontalAlignment="Left" Margin="739,0,0,23" VerticalAlignment="Bottom" Click="button_Click" ></Button>
-    </Grid>
+        Title="MainWindow" Height="450" Width="920">
+	<Grid Margin="0,0,0,-6">
+		<ListView x:Name="listView" Margin="0,0,0,62">
+			<ListView.View >
+				<GridView>
+					<GridViewColumn Header="ID" DisplayMemberBinding="{Binding m_nID}" Width="100"></GridViewColumn>
+					<GridViewColumn Header="Imię" DisplayMemberBinding="{Binding Name}" Width="100"></GridViewColumn>
+					<GridViewColumn Header="Nazwisko" DisplayMemberBinding="{Binding Sname}" Width="100"></GridViewColumn>
+					<GridViewColumn Header="PESEL" DisplayMemberBinding="{Binding PESEL}" Width="100"></GridViewColumn>
+					<GridViewColumn Header="Drugie Imię" DisplayMemberBinding="{Binding ScName}" Width="100"></GridViewColumn>
+					<GridViewColumn Header="Data Urodzenia" DisplayMemberBinding="{Binding m_dBirthDate}" Width="100"></GridViewColumn>
+					<GridViewColumn Header="Numer Telefonu" DisplayMemberBinding="{Binding m_nPhoneNumber}" Width="100"></GridViewColumn>
+					<GridViewColumn Header="Adres Zamieszkania" DisplayMemberBinding="{Binding HomeAdress}" Width="100"></GridViewColumn>
+					<GridViewColumn Header="Kod Pocztowy" DisplayMemberBinding="{Binding m_strHomeCode}" Width="100"></GridViewColumn>
+				</GridView>
+			</ListView.View>
+		</ListView>
+		<Button x:Name="button" Content="dodaj" HorizontalAlignment="Left" Margin="739,0,0,23" VerticalAlignment="Bottom" Click="button_Click" ></Button>
+	</Grid>
 </Window>
