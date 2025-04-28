@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 
+
 namespace WpfApp1
 {
     public class MyItem
@@ -10,6 +11,7 @@ namespace WpfApp1
         public string PESEL { get; set; } = string.Empty;
         public string ScName { get; set; } = string.Empty;
         public string HomeAdress { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
     }
 
     public partial class Window1 : Window
@@ -23,13 +25,25 @@ namespace WpfApp1
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+
+
+            var birthDate = BirthDatePicker.SelectedDate;
+            if (!DataValidator.IsValidPesel(peselTextBox.Text, birthDate))
+            {
+                MessageBox.Show("Nieprawidłowy PESEL lub data", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+
             MyItem item = new MyItem
             {
-                Name = nameTextBox.Text,
+                Name = (nameTextBox.Text),
                 Sname = snameTextBox.Text,
-                PESEL = peselTextBox.Text,
+                PESEL = (peselTextBox.Text).Trim(),
                 ScName = scnameTextBox.Text,
-                HomeAdress = homeadressTextBox.Text
+                HomeAdress = homeadressTextBox.Text,
+                PhoneNumber = DataValidator.FormatPhoneNumber(PhoneNumber.Text)
+
                 //MessageBox.Show(wnd.dataurodzneia.totring().splik()[0]);
 
             };
@@ -39,5 +53,7 @@ namespace WpfApp1
 
 
         }
+
+
     }
 }

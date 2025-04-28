@@ -23,7 +23,7 @@
 		<TextBox  x:Name="scnameTextBox" HorizontalAlignment="Left" Height="24" Margin="492,32,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148" RenderTransformOrigin="0.575,5.395"/>
 		<Label Content="Drugie Imię: " HorizontalAlignment="Left" Height="42" Margin="388,26,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="1.3,0.742" FontSize="16"/>
 
-		<TextBox  x:Name="BirthDate" HorizontalAlignment="Left" Height="23" Margin="186,195,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146"/>
+		<DatePicker x:Name="BirthDatePicker" HorizontalAlignment="Left" Height="23" Margin="186,195,0,0"   VerticalAlignment="Top" Width="146"/>
 		<Label Content="Data urodzenia:" HorizontalAlignment="Left" Height="27" Margin="56,191,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="1.3,0.742" FontSize="16"/>
 
 		<TextBox  x:Name="PhoneNumber" HorizontalAlignment="Left" Height="24" Margin="184,342,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148"/>

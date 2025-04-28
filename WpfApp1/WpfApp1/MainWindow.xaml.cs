@@ -23,7 +23,7 @@ namespace WpfApp1
 
         private void AddItemToList(MyItem item)
         {
-            if (PeselChck.IsValidPesel(item.PESEL))
+            if (DataValidator.IsValidPesel(item.PESEL))
             {
                 Items.Add(item);
                 listView.Items.Refresh();
