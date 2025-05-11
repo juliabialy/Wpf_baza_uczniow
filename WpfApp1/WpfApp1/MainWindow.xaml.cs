@@ -23,15 +23,9 @@ namespace WpfApp1
 
         private void AddItemToList(MyItem item)
         {
-            if (DataValidator.IsValidPesel(item.PESEL))
-            {
-                Items.Add(item);
-                listView.Items.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Nieprawidłowy PESEL");
-            }
+            Items.Add(item);
+            listView.Items.Refresh();
         }
+
     }
 }

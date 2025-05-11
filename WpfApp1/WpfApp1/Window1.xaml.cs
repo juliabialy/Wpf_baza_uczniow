@@ -25,34 +25,36 @@ namespace WpfApp1
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-
-
             var birthDate = BirthDatePicker.SelectedDate;
-            if (!DataValidator.IsValidPesel(peselTextBox.Text, birthDate))
+
+            if (birthDate == null)
             {
-                MessageBox.Show("Nieprawidłowy PESEL lub data", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Wybierz datę urodzenia", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
+            string pesel = peselTextBox.Text.Trim();
+
+            if (!DataValidator.IsValidPesel(pesel, birthDate))
+            {
+                MessageBox.Show("Nieprawidłowy PESEL lub data urodzenia", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             MyItem item = new MyItem
             {
-                Name = (nameTextBox.Text),
-                Sname = snameTextBox.Text,
-                PESEL = (peselTextBox.Text).Trim(),
-                ScName = scnameTextBox.Text,
-                HomeAdress = homeadressTextBox.Text,
+                Name = DataValidator.FormatText(nameTextBox.Text),
+                Sname = DataValidator.FormatText(snameTextBox.Text),
+                PESEL = pesel,
+                ScName = DataValidator.FormatText(scnameTextBox.Text),
+                HomeAdress = DataValidator.FormatText(homeadressTextBox.Text),
                 PhoneNumber = DataValidator.FormatPhoneNumber(PhoneNumber.Text)
-
-                //MessageBox.Show(wnd.dataurodzneia.totring().splik()[0]);
-
             };
 
             DataSubmit?.Invoke(item);
             this.Close();
-
-
         }
+
 
 
     }

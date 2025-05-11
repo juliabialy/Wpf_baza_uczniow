@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
+
 namespace WpfApp1
 {
     public static class DataValidator
     {
-
-        public static bool IsValidPesel(string pesel)
+        public static bool IsValidPesel(string pesel, DateTime? birthDate)
         {
             if (string.IsNullOrEmpty(pesel) || pesel.Length != 11 || !pesel.All(char.IsDigit))
                 return false;
@@ -17,11 +16,11 @@ namespace WpfApp1
             for (int i = 0; i < 10; i++)
                 sum += (pesel[i] - '0') * weights[i];
 
-            if ((10 - sum % 10) % 10 != (pesel[10] - '0'))
+            int controlDigit = (10 - sum % 10) % 10;
+            if (controlDigit != (pesel[10] - '0'))
                 return false;
 
-
-            // data
+            // data urodzenia z PESEL
             int year = int.Parse(pesel.Substring(0, 2));
             int month = int.Parse(pesel.Substring(2, 2));
             int day = int.Parse(pesel.Substring(4, 2));
@@ -32,37 +31,70 @@ namespace WpfApp1
             else if (month >= 20) { year += 2000; month -= 20; }
             else { year += 1900; }
 
-            return birthDate.Value.Date == new DateTime(year, month, day);
+            DateTime parsedDate;
+            try
+            {
+                parsedDate = new DateTime(year, month, day);
+            }
+            catch
+            {
+                return false;
+            }
 
+            if (birthDate == null)
+                return false;
+
+            return parsedDate.Date == birthDate.Value.Date;
         }
 
-        //Phone Number
         public static string FormatPhoneNumber(string phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber))
-                return phoneNumber;
+                return string.Empty;
 
-            string cleanedNumber = phoneNumber.Replace(" ", "")
-                                           .Replace("-", "")
-                                           .Replace("(", "")
-                                           .Replace(")", "");
-
-            if (cleanedNumber.StartsWith("+"))
-            {
-                return cleanedNumber;
-            }
+            string cleanedNumber = new string(phoneNumber
+                .Where(char.IsDigit)
+                .ToArray());
 
             if (cleanedNumber.StartsWith("48") && cleanedNumber.Length == 11)
-            {
-                return "+" + cleanedNumber;
-            }
-
+                return "+48" + cleanedNumber.Substring(2);
             if (cleanedNumber.Length == 9)
-            {
                 return "+48" + cleanedNumber;
+            if (cleanedNumber.StartsWith("00") && cleanedNumber.Length > 4)
+                return "+" + cleanedNumber.Substring(2);
+
+            return "+" + cleanedNumber;
+        }
+
+        public static string FormatText(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return string.Empty;
+
+            input = input.Trim().ToLower();
+            var separators = new[] { ' ', '-' };
+            var parts = input.Split(separators);
+
+            for (int i = 0; i < parts.Length; i++)
+            {
+                if (parts[i].Length > 0)
+                  parts[i] = char.ToUpper(parts[i][0]) + parts[i][1..];
             }
 
-            return phoneNumber;
+            var result =input;
+
+            foreach (var sep1 in separators)
+            {
+                if (input.Contains(sep1))
+                    result = string.Join(sep1.ToString(), input.Split(sep1).Select(FormatText));
+            }
+
+            if (!input.Contains(' ') && !input.Contains('-'))
+                return parts[0];
+
+            return result;
         }
+
+
     }
 }
