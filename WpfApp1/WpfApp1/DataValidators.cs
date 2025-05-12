@@ -10,7 +10,6 @@ namespace WpfApp1
             if (string.IsNullOrEmpty(pesel) || pesel.Length != 11 || !pesel.All(char.IsDigit))
                 return false;
 
-            // suma kontrolna
             int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 };
             int sum = 0;
             for (int i = 0; i < 10; i++)
@@ -20,7 +19,6 @@ namespace WpfApp1
             if (controlDigit != (pesel[10] - '0'))
                 return false;
 
-            // data urodzenia z PESEL
             int year = int.Parse(pesel.Substring(0, 2));
             int month = int.Parse(pesel.Substring(2, 2));
             int day = int.Parse(pesel.Substring(4, 2));
@@ -78,10 +76,10 @@ namespace WpfApp1
             for (int i = 0; i < parts.Length; i++)
             {
                 if (parts[i].Length > 0)
-                  parts[i] = char.ToUpper(parts[i][0]) + parts[i][1..];
+                    parts[i] = char.ToUpper(parts[i][0]) + parts[i][1..];
             }
 
-            var result =input;
+            var result = input;
 
             foreach (var sep1 in separators)
             {
@@ -89,12 +87,10 @@ namespace WpfApp1
                     result = string.Join(sep1.ToString(), input.Split(sep1).Select(FormatText));
             }
 
-            if (!input.Contains(' ') && !input.Contains('-'))
-                return parts[0];
+            if (!input.Contains('-'))
+                result = string.Join(" ", parts);
 
             return result;
         }
-
-
     }
 }
